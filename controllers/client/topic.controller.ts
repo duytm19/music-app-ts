@@ -7,5 +7,8 @@ export const topics = async (req:Request, res:Response)=>{
         deleted:false
     })
 
-    res.render("client/pages/topics/index")
+    res.render("client/pages/topics/index",{
+        pageTitle:"Music Topic",
+        topics:topics
+    })
 }
