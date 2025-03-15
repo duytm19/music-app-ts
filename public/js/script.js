@@ -32,3 +32,29 @@ const ap = new APlayer({
     })
 }
 // End Aplayer
+
+// button Like
+const btnLike = document.querySelector("[btn-like]")
+if(btnLike){
+    btnLike.addEventListener("click",()=>{
+        const idSong = btnLike.getAttribute("btn-like")
+        const isActive = btnLike.classList.contains("active")
+        
+        const typeLike = isActive? "dislike": "like"
+
+        const link = `/songs/like/${typeLike}/${idSong}`
+
+        const option ={
+            method:"PATCH"
+        }
+        fetch(link,option)
+            .then(res => res.json())
+            .then(data=>{
+                const span = btnLike.querySelector("span")
+                span.innerHTML = `${data.like} Like`
+
+                btnLike.classList.toggle("active")
+            })
+    })
+}
+// End button Like
