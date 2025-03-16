@@ -60,28 +60,31 @@ if(btnLike){
 // End button Like
 
 // button Like
-const btnFavorite = document.querySelector("[btn-favorite]")
-if(btnFavorite){
-    btnFavorite.addEventListener("click",()=>{
-        const idSong = btnFavorite.getAttribute("btn-favorite")
-        const isActive = btnFavorite.classList.contains("active")
-        
-        const typeFavorite = isActive? "unfavorite": "favorite"
-
-        const link = `/songs/favorite/${typeFavorite}/${idSong}`
-
-        const option ={
-            method:"PATCH"
-        }
-        fetch(link,option)
-            .then(res => res.json())
-            .then(data=>{
-                if(data.code==200){
-                
-                    btnFavorite.classList.toggle("active")
-                }
-                
-            })
+const btnFavoriteList = document.querySelectorAll("[btn-favorite]")
+if(btnFavoriteList.length>0){
+    btnFavoriteList.forEach(btnFavorite=>{
+        btnFavorite.addEventListener("click",()=>{
+            const idSong = btnFavorite.getAttribute("btn-favorite")
+            const isActive = btnFavorite.classList.contains("active")
+            
+            const typeFavorite = isActive? "unfavorite": "favorite"
+    
+            const link = `/songs/favorite/${typeFavorite}/${idSong}`
+    
+            const option ={
+                method:"PATCH"
+            }
+            fetch(link,option)
+                .then(res => res.json())
+                .then(data=>{
+                    if(data.code==200){
+                    
+                        btnFavorite.classList.toggle("active")
+                    }
+                    
+                })
+        })
     })
+    
 }
 // End button Like
