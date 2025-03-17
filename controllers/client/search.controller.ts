@@ -4,10 +4,10 @@ import Song from "../../models/song.model"
 import Singer from "../../models/singer.model"
 import { convert } from "../../helpers/convertToSlug"
 
-//[GET] /search/result
+//[GET] /search/:typeSearch
 export const result = async (req:Request,res:Response)=>{
     const keyword: string  = `${req.query.keyword}`
-
+    const typeSearch: string = req.params.typeSearch
     
     let newSongs = []
     
@@ -30,13 +30,37 @@ export const result = async (req:Request,res:Response)=>{
                 _id:item.singerId
             })
 
-            item["infoSinger"]=infoSinger
+            // item["infoSinger"]=infoSinger
+            newSongs.push({
+                id:item.id,
+                title:item.title,
+                avatar:item.avatar,
+                like:item.like,
+                slug:item.slug,
+                infoSinger:{
+                    fullName: infoSinger.fullName
+                }
+            })  
         }
-        newSongs = songs        
+          
     }
-    res.render("client/pages/search/result",{
-        pageTitle:  `Result: ${keyword}`,
-        keyword:keyword,
-        songs:newSongs
-    })
+    
+    switch(typeSearch){
+        case "result":
+            res.render("client/pages/search/result",{
+                pageTitle:  `Result: ${keyword}`,
+                keyword:keyword,
+                songs:newSongs
+            })
+            break
+        case "suggest":
+            res.json({
+                code:200,
+                message:"Successfully!",
+                songs:newSongs
+            })
+            break
+        default:
+            break
+    }
 }
