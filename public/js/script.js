@@ -30,6 +30,20 @@ const ap = new APlayer({
     ap.on('pause',()=>{
         avatar.computedStyleMap.animationPlayState = "paused"
     })
+
+    ap.on("ended",()=>{
+        const link =`/songs/listen/${dataSong._id}`
+        const option={
+            method: "PATCH"
+        }
+        fetch(link,option)
+            .then(res => res.json())
+            .then(data=>{
+                const listen = document.querySelector(".inner-detail .inner-listen span")
+                console.log(listen)
+                listen.innerHTML=`${data.listen} listens`
+            })
+    })
 }
 // End Aplayer
 
