@@ -3,6 +3,7 @@ import * as database from './config/database'
 import dotenv from 'dotenv'
 import clientRoutes from "./routes/client/index.route"
 import { systemconfig } from "./config/config"
+import bodyParser from "body-parser"
 import adminRoutes from "./routes/admin/index.route"
 import path from 'path' 
 dotenv.config()
@@ -16,6 +17,8 @@ app.locals.prefixAdmin = systemconfig.prefixAdmin
 app.use(express.static("public"))
 app.set("views","./views")
 app.set("view engine","pug")
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 // tiny MCE
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 adminRoutes(app)
