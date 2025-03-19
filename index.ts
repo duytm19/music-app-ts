@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import clientRoutes from "./routes/client/index.route"
 import { systemconfig } from "./config/config"
 import bodyParser from "body-parser"
+import methodOverride from 'method-override'
 import adminRoutes from "./routes/admin/index.route"
 import path from 'path' 
 dotenv.config()
@@ -17,6 +18,8 @@ app.locals.prefixAdmin = systemconfig.prefixAdmin
 app.use(express.static("public"))
 app.set("views","./views")
 app.set("view engine","pug")
+
+app.use(methodOverride("_method"))
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // tiny MCE
