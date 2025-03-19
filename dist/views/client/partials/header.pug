@@ -1,0 +1,43 @@
+header.header 
+    .container-fluid
+        .row.align-items-center 
+            .col-3 
+                .inner-logo 
+                    a(hrefs=`/`) 
+                        img(src="/images/logo.jpg" width="200px" height= "200px")
+            
+
+            .col-5 
+                .box-search 
+                    form(
+                        action="/search/result"
+                        method="GET"
+                    )
+                        div(class="form-group d-flex mb-0")
+                            input(
+                                type="text"
+                                placeholder="Enter keyword"
+                                class="form-control"
+                                name="keyword"
+                                value=keyword
+                            )
+                            button(
+                                type="submit"
+                                class="btn btn-primary"
+                            ) Search
+                            
+                    .inner-suggest 
+                        .inner-list
+            .col-4
+                .inner-menu 
+                    ul 
+                        li
+                            a(href="/") 
+                                <i class="fa-solid fa-house"></i> Home Page 
+                        li 
+                            a(href="/") 
+                                <i class="fa-solid fa-music"> </i>Title
+                        li 
+                            a(href="/favorite-songs") 
+                                <i class="fa-solid fa-heart"></i> Favorite Song
+                        
