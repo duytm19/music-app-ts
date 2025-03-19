@@ -15,8 +15,8 @@ const app:Express=express()
 
 const port: Number =3000
 app.locals.prefixAdmin = systemconfig.prefixAdmin
-app.use(express.static("public"))
-app.set("views","./views")
+app.use(express.static(`${__dirname}/public`))
+app.set("views",`${__dirname}/views`)
 app.set("view engine","pug")
 
 app.use(methodOverride("_method"))
