@@ -4,9 +4,17 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.ts",
-    "build":"tsc",
+    "build": "tsc && node copy-dirs.js",
+    "ts.check":"tsc --project tsconfig.json",
+    "add-build":"git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "pre-commit":[
+    "ts.check",
+    "build",
+    "add-build"
+  ]
+  ,
   "author": "",
   "license": "ISC",
   "description": "",
@@ -15,6 +23,7 @@
     "cloudinary": "^2.6.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "fs-extra": "^11.3.0",
     "method-override": "^3.0.0",
     "mongoose": "^8.12.1",
     "mongoose-slug-updater": "^3.3.0",
@@ -28,6 +37,7 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.10",
     "nodemon": "^3.1.9",
+    "pre-commit": "^1.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }
